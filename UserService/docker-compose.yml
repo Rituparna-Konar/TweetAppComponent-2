@@ -1,10 +1,5 @@
 version: '3.1'
 services:
-  mycassandra:
-    image: cassandra
-    container_name: TweetAppcassandra
-    ports:
-      - "9042:9042"
   zookeeper:
     image: wurstmeister/zookeeper:3.4.6
     container_name: tweet-zookeeper
