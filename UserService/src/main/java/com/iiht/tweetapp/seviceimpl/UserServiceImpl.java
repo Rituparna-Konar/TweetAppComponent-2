@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserServices{
 	public ResponseEntity<Object> register(UserData userData) {
 		log.info("inside user service implementation to register user");
 		Optional<UserData> user=userRepository.findById(userData.getUserName());
-		if(user.isEmpty()) {
+		if(!user.isPresent()) {
 			try {
 				log.info("registered successfully");
 				userRepository.save(userData);
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserServices{
 	@Override
 	public ResponseEntity<Object> forgotPassword(LoginDetails data){
             Optional<UserData> user = userRepository.findById(data.getUsername());
-            if (user.isEmpty()) {
+            if (!user.isPresent()) {
             	log.info("user name not found");
                 throw new UsernameNotFoundException("Username Not Found, Resister");
             }

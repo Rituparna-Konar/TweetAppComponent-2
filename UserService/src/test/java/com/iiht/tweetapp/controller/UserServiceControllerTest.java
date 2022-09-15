@@ -37,22 +37,21 @@ class UserServiceControllerTest {
 	
 	@Test
 	void register() {
-		
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
 		when(userServices.register(userData)).thenReturn(new ResponseEntity<Object>("Added Successfully",HttpStatus.CREATED));
 		assertEquals(201, userController.register(userData).getStatusCodeValue());
 	}
 	@Test
 	void login() {
-		data=new LoginDetails("shilpa","shilpa1");
+		data=new LoginDetails("rituparna","rituparna1");
 		when(userServices.login(data)).thenReturn(new ResponseEntity<>(new AuthResponse(),HttpStatus.OK));
 		assertEquals(200, userController.login(data).getStatusCodeValue());
 	}
 	@Test
 	void forgotPassword() {
-		data=new LoginDetails("shilpa","shilpa1");
+		data=new LoginDetails("rituparna","rituparna1");
 		when(userServices.forgotPassword(data)).thenReturn(new ResponseEntity<>(new AuthResponse(),HttpStatus.OK));
-		assertEquals(200, userController.forgotPassword("shilpa", data).getStatusCodeValue());
+		assertEquals(200, userController.forgotPassword("rituparna", data).getStatusCodeValue());
 	}
 	@Test
 	void validate() {
@@ -67,9 +66,8 @@ class UserServiceControllerTest {
 	}
 	@Test
 	void searchuser() {
-		
-		when(userServices.searchByUsername("shi")).thenReturn(new ResponseEntity<>(new ArrayList<>(),HttpStatus.OK));
-		assertEquals(200, userController.searchByUsername("shi").getStatusCodeValue());
+		when(userServices.searchByUsername("ritu")).thenReturn(new ResponseEntity<>(new ArrayList<>(),HttpStatus.OK));
+		assertEquals(200, userController.searchByUsername("ritu").getStatusCodeValue());
 	}
 	
 

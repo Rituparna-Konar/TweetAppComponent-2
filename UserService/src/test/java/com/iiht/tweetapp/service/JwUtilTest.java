@@ -28,7 +28,7 @@ import com.iiht.tweetapp.seviceimpl.JwtUtil;
 
 	@Test
 	 void generateTokenTest() {
-		userdetails = new User("shilpa", "shilpa", new ArrayList<>());
+		userdetails = new User("rituparna", "rituparna", new ArrayList<>());
 		Mockito.when(jwt.generateToken(userdetails)).thenReturn("token");
 		String generateToken = jwt.generateToken(userdetails);
 		assertNotNull(generateToken);
@@ -37,7 +37,7 @@ import com.iiht.tweetapp.seviceimpl.JwtUtil;
 
 	@Test
 	 void validateTokenTest() {
-		userdetails = new User("shilpa", "shilpa", new ArrayList<>());
+		userdetails = new User("rituparna", "rituparna", new ArrayList<>());
 		Mockito.when(jwt.generateToken(userdetails)).thenReturn("token");
 		Mockito.when(jwt.validateToken("token")).thenReturn(true);
 		String generateToken = jwt.generateToken(userdetails);
@@ -47,7 +47,7 @@ import com.iiht.tweetapp.seviceimpl.JwtUtil;
 	
 	@Test
 	 void validateTokenNegativeTest() {
-		userdetails = new User("shilpa", "shilpa", new ArrayList<>());
+		userdetails = new User("rituparna", "rituparna", new ArrayList<>());
 		Mockito.when(jwt.generateToken(userdetails)).thenReturn("token1");
 		Mockito.when(jwt.validateToken("token1")).thenReturn(false);
 		String generateToken = jwt.generateToken(userdetails);

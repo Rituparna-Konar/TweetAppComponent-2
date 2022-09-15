@@ -45,41 +45,41 @@ class UserServiceTest {
 	
 	@Test
 	void loginTest() {
-		userdetails=new User("shilpa", "shilpa", new ArrayList<>());
-		when(custdetailservice.loadUserByUsername("shilpa")).thenReturn(userdetails);
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		when(userRepository.findById("shilpa")).thenReturn(Optional.of(userData));
-		LoginDetails login=new LoginDetails("shilpa","shilpa");
+		userdetails=new User("rituparna", "rituparna", new ArrayList<>());
+		when(custdetailservice.loadUserByUsername("rituparna")).thenReturn(userdetails);
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		when(userRepository.findById("rituparna")).thenReturn(Optional.of(userData));
+		LoginDetails login=new LoginDetails("rituparna","rituparna");
 		when(jwtutil.generateToken(userdetails)).thenReturn("token");
 		assertEquals(200, userService.login(login).getStatusCodeValue());
 	}
 	@Test
 	void loginTestFail() {
-		userdetails=new User("shilpa", "shilpa", new ArrayList<>());
-		when(custdetailservice.loadUserByUsername("shilpa")).thenReturn(userdetails);
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		when(userRepository.findById("shilpa")).thenReturn(Optional.of(userData));
-		LoginDetails login=new LoginDetails("shilpa","shilpa1");
+		userdetails=new User("rituparna", "rituparna", new ArrayList<>());
+		when(custdetailservice.loadUserByUsername("rituparna")).thenReturn(userdetails);
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		when(userRepository.findById("rituparna")).thenReturn(Optional.of(userData));
+		LoginDetails login=new LoginDetails("rituparna","rituparna1");
 		assertEquals(403, userService.login(login).getStatusCodeValue());
 	}
 	
 	@Test
 	void registerTest() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(null));
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(null));
 		when(userRepository.save(userData)).thenReturn(userData);
 		assertEquals(201, userService.register(userData).getStatusCodeValue());
 	}
 	@Test
 	void registerTestFail() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(userData));
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(userData));
 		assertThrows(UserExistsException.class,()-> userService.register(userData));
 	}
 	@Test
 	void registerTestFail2() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		lenient().when(userRepository.findById("shilpa")).thenReturn(Optional.of(userData));
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		lenient().when(userRepository.findById("rituparna")).thenReturn(Optional.of(userData));
 		lenient().when(userRepository.save(userData)).thenThrow(RuntimeException.class);
 		assertThrows(UserExistsException.class,()-> userService.register(userData));
 	}
@@ -96,41 +96,41 @@ class UserServiceTest {
 	@Test
 	void getUsersByUsername() {
 		List<UserData> users=new ArrayList<>();
-		users.add(new UserData("shilpa", "M", "shilpa", "shilpa", 0));
-		users.add(new UserData("shilpa", "M", "shilpa", "shilpa", 0));
+		users.add(new UserData("rituparna", "M", "rituparna", "rituparna", 0));
+		users.add(new UserData("rituparna", "M", "rituparna", "rituparna", 0));
 		when(userRepository.findAll()).thenReturn(users);
-		assertEquals(users, ((ResponseMessage) userService.searchByUsername("shi").getBody()).getResponse());
+		assertEquals(users, ((ResponseMessage) userService.searchByUsername("ritu").getBody()).getResponse());
 	}
 	
 	@Test
 	void forgotPassword() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		LoginDetails login=new LoginDetails("shilpa","shilpa1");
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(userData));
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		LoginDetails login=new LoginDetails("rituparna","rituparna1");
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(userData));
 		when(userRepository.save(userData)).thenReturn(userData);
 		assertEquals(200, userService.forgotPassword(login).getStatusCodeValue());
 	}
 	@Test
 	void forgotPasswordFail() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
-		LoginDetails login=new LoginDetails("shilpa","shilpa1");
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(null));
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
+		LoginDetails login=new LoginDetails("rituparna","rituparna1");
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(null));
 		assertThrows(UsernameNotFoundException.class,()-> userService.forgotPassword(login));
 	}
 	@Test
 	void validateToken() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
 		when(jwtutil.validateToken("token")).thenReturn(true);
-		when(jwtutil.extractUsername("token")).thenReturn("shilpa");
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(userData));
+		when(jwtutil.extractUsername("token")).thenReturn("rituparna");
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(userData));
 		assertEquals(200, userService.validate("Bearer token").getStatusCodeValue());
 	}
 	@Test
 	void validateTokenFail() {
-		userData=new UserData("shilpa", "M", "shilpa", "shilpa", 0);
+		userData=new UserData("rituparna", "M", "rituparna", "rituparna", 0);
 		when(jwtutil.validateToken("token")).thenReturn(true);
-		when(jwtutil.extractUsername("token")).thenReturn("shilpa");
-		when(userRepository.findById("shilpa")).thenReturn(Optional.ofNullable(null));
+		when(jwtutil.extractUsername("token")).thenReturn("rituparna");
+		when(userRepository.findById("rituparna")).thenReturn(Optional.ofNullable(null));
 		assertEquals(204, userService.validate("Bearer token").getStatusCodeValue());
 	}
 	@Test
